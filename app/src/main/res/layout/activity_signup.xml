@@ -76,7 +76,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignup"
             android:background="@drawable/btn_primary"
             android:textColor="@color/colorPrimaryButton"
             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
             android:text="Already have an account?" />
 
         <TextView
-            android:id="@+id/tvSignUp"
+            android:id="@+id/tvSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"

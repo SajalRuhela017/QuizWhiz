@@ -67,7 +67,6 @@
         <Button
             android:id="@+id/btnLogin"
             android:background="@drawable/btn_primary"
-            android:backgroundTint="@color/colorPrimaryButtonBg"
             android:textColor="@color/colorPrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
