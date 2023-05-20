@@ -92,7 +92,7 @@
     <ImageView
         android:id="@+id/ivFooter"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:src="@drawable/ic_footer_wave"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
