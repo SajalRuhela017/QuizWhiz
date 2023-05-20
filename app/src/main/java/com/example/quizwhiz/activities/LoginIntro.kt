@@ -1,4 +1,4 @@
-package com.example.quizwhiz
+package com.example.quizwhiz.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
