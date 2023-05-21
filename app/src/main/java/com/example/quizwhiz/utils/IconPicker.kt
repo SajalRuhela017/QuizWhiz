@@ -3,7 +3,7 @@ package com.example.quizwhiz.utils
 import com.example.quizwhiz.R
 
 object IconPicker {
-    val icons = arrayOf(
+    private val icons = arrayOf(
         R.drawable.doodle_bell_icon,
         R.drawable.doodle_board ,
         R.drawable.doodle_book ,

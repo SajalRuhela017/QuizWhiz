@@ -1,7 +1,7 @@
 package com.example.quizwhiz.utils
 
 object ColorPicker {
-    val colors = arrayOf(
+    private val colors = arrayOf(
         "#ccd5ae",
         "#d4a373",
         "#2ec4b6",

@@ -1,6 +1,6 @@
 package com.example.quizwhiz.models
 
-data class Questions(
+data class Question(
     var description: String = "",
     var option1: String = "",
     var option2: String = "",

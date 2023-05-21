@@ -2,19 +2,23 @@ package com.example.quizwhiz.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.quizwhiz.R
 import com.example.quizwhiz.adapters.QuizAdapter
 import com.example.quizwhiz.databinding.ActivityMainBinding
 import com.example.quizwhiz.models.Quiz
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityMainBinding
     lateinit var adapter: QuizAdapter
     private var quizList = mutableListOf<Quiz>()
+    lateinit var firestore: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,8 +42,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpViews() {
+        setUpFirestore()
         setUpDrawerLayout()
         setUpRecyclerView()
+    }
+
+    private fun setUpFirestore() {
+        firestore = FirebaseFirestore.getInstance()
+        val collectionReference = firestore.collection("QuizWhiz")
+        collectionReference.addSnapshotListener { value, error ->
+            if(value == null || error != null) {
+                Toast.makeText(this, "Some error occurred! $error", Toast.LENGTH_SHORT).show()
+                return@addSnapshotListener
+            }
+            Log.d("DATA", value.toObjects(Quiz::class.java).toString())
+            quizList.clear()
+            quizList.addAll(value.toObjects(Quiz::class.java))
+            adapter.notifyDataSetChanged()
+        }
+
     }
 
     private fun setUpRecyclerView() {
