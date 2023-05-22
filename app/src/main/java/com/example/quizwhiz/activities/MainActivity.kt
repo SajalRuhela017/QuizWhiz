@@ -1,5 +1,6 @@
 package com.example.quizwhiz.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +12,10 @@ import com.example.quizwhiz.R
 import com.example.quizwhiz.adapters.QuizAdapter
 import com.example.quizwhiz.databinding.ActivityMainBinding
 import com.example.quizwhiz.models.Quiz
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -23,28 +27,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        populateDummyData()
         setUpViews()
-    }
-
-    private fun populateDummyData() {
-        quizList.add(Quiz("20-05-2023", "20-05-2023"))
-        quizList.add(Quiz("21-05-2023", "21-05-2023"))
-        quizList.add(Quiz("22-05-2023", "22-05-2023"))
-        quizList.add(Quiz("23-05-2023", "23-05-2023"))
-        quizList.add(Quiz("24-05-2023", "24-05-2023"))
-        quizList.add(Quiz("25-05-2023", "25-05-2023"))
-        quizList.add(Quiz("26-05-2023", "26-05-2023"))
-        quizList.add(Quiz("27-05-2023", "27-05-2023"))
-        quizList.add(Quiz("28-05-2023", "28-05-2023"))
-        quizList.add(Quiz("29-05-2023", "29-05-2023"))
-        quizList.add(Quiz("30-05-2023", "30-05-2023"))
     }
 
     private fun setUpViews() {
         setUpFirestore()
         setUpDrawerLayout()
         setUpRecyclerView()
+        setUpDatePicker()
+    }
+
+    private fun setUpDatePicker() {
+        binding.faDatePicker.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker().build()
+            datePicker.show(supportFragmentManager, "datePicker")
+            datePicker.addOnPositiveButtonClickListener {
+                Log.d("DatePicker", datePicker.headerText)
+                val dateFormatter = SimpleDateFormat("dd-mm-yyyy")
+                val date = dateFormatter.format(Date(it))
+                val intent = Intent(this, QuestionActivity::class.java)
+                intent.putExtra("DATE", date)
+                startActivity(intent)
+            }
+            datePicker.addOnNegativeButtonClickListener {
+                Log.d("DatePicker", "Negative")
+            }
+            datePicker.addOnCancelListener {
+                Log.d("DatePicker", "Cancelled")
+            }
+        }
     }
 
     private fun setUpFirestore() {
@@ -76,6 +87,12 @@ class MainActivity : AppCompatActivity() {
             R.string.app_name
         )
         actionBarDrawerToggle.syncState()
+        binding.navView.setNavigationItemSelectedListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            binding.mainDrawer.closeDrawers()
+            true
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
