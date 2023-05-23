@@ -1,6 +1,7 @@
 package com.example.quizwhiz.activities
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -88,10 +89,30 @@ class MainActivity : AppCompatActivity() {
         )
         actionBarDrawerToggle.syncState()
         binding.navView.setNavigationItemSelectedListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+            handleNavigationBarClicks(it.itemId)
             binding.mainDrawer.closeDrawers()
             true
+        }
+    }
+
+    private fun handleNavigationBarClicks(menuItemId: Int) : Boolean = when(menuItemId) {
+        R.id.btnProfile -> {
+            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.btnFollowUs -> {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/SajalRuhela017"))
+            startActivity(intent)
+            true
+        }
+        R.id.btnRateUs -> {
+            Toast.makeText(this, "Rate us functionality will be added soon", Toast.LENGTH_SHORT).show()
+            true
+        }
+        else -> {
+            false
         }
     }
 

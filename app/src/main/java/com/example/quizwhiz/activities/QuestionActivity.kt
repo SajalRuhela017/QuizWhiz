@@ -60,6 +60,7 @@ class QuestionActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
         }
     }

@@ -15,11 +15,16 @@
         tools:targetApi="31">
         <activity
             android:name=".activities.ResultActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".activities.QuestionActivity"
             android:exported="false"
             android:theme="@style/Theme.QuizWhiz">
+        </activity>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".activities.LoginIntro"

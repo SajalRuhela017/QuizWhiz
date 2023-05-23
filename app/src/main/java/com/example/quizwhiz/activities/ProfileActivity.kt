@@ -3,7 +3,6 @@ package com.example.quizwhiz.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.quizwhiz.R
 import com.example.quizwhiz.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 
