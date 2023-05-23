@@ -97,7 +97,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleNavigationBarClicks(menuItemId: Int) : Boolean = when(menuItemId) {
         R.id.btnProfile -> {
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
             true
